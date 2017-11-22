@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="LiuNing" />
+
+
+
+<meta name="description" content="批量处理图片，裁剪成预定格式及大小的图片。">
+<meta name="keywords" content="C++,OpenCV">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图像裁剪">
+<meta property="og:url" content="https://liuning-scu-cn.github.io.git/2017/11/22/Picture-Cutting/index.html">
+<meta property="og:site_name" content="LiuNing&#39;s Blog">
+<meta property="og:description" content="批量处理图片，裁剪成预定格式及大小的图片。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-22T09:57:06.144Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图像裁剪">
+<meta name="twitter:description" content="批量处理图片，裁剪成预定格式及大小的图片。">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="LiuNing&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/black/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>图像裁剪 | LiuNing&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: true
+    }
+</script>
+
+
+    <script>
+        yiliaConfig.jquery_ui = [true, "//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js", "//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css"];
+    </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/head.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">LiuNing</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">It will be my sunny day as long as you are in good health.</p>
+        
+
+        
+            <form id="search-form">
+            <input type="text" id="local-search-input" name="q" placeholder="search..." class="search form-control" autocomplete="off" autocorrect="off" searchonload="true" />
+            <i class="fa fa-times" onclick="resetSearch()"></i>
+            </form>
+            <div id="local-search-result"></div>
+            <p class='no-result'>No results found <i class='fa fa-spinner fa-pulse'></i></p>
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:2742229056@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="https://github.com/" title="GitHub"></a>
+                            
+                                <a class="fa Google" href="https://www.google.com/" title="Google"></a>
+                            
+                                <a class="fa RSS" href="https://yukizzz.github.io/" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yelee/">Yelee</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">Computer Vision.</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">LiuNing</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/head.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">LiuNing</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">It will be my sunny day as long as you are in good health.</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:2742229056@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/" title="GitHub"></a>
+                            
+                                <a class="fa Google" target="_blank" href="https://www.google.com/" title="Google"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="https://yukizzz.github.io/" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Picture-Cutting" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/11/22/Picture-Cutting/" class="article-date">
+      <time datetime="2017-11-22T09:21:02.000Z" itemprop="datePublished">2017-11-22</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      图像裁剪
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/计算机视觉/">计算机视觉</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/">OpenCV</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <a id="more"></a>
+<h2 id="图像裁剪"><a href="#图像裁剪" class="headerlink" title="图像裁剪"></a>图像裁剪</h2><h3 id="项目说明"><a href="#项目说明" class="headerlink" title="项目说明"></a>项目说明</h3><ul>
+<li>默认opencv环境已经搭建成功。</li>
+<li>在Visual Studio新建一个空项目，配置属性管理器，将活动解决方案平台设置成x64,然后在Debug|x64文件夹下导入opencv_64.props文件。</li>
+<li>在工程文件中main.cpp所在的文件夹下新建两个文件夹（result/和sample/）。</li>
+<li>将需要处理的图片资源放到sample/文件夹下。</li>
+<li>将main.cpp中复制到工程中的源文件夹下。</li>
+<li>根据实际情况分别修改s_format,n和m的值。</li>
+<li>需要根据源图片xxx.jpg的xxx值对jointString()函数修改。</li>
+</ul>
+<h3 id="项目代码实现"><a href="#项目代码实现" class="headerlink" title="项目代码实现"></a>项目代码实现</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include&lt;opencv2\opencv.hpp&gt;</span></span><br><span class="line"><span class="comment">#include&lt;opencv2\core\core.hpp&gt;</span></span><br><span class="line"><span class="comment">#include&lt;opencv2\highgui\highgui.hpp&gt;</span></span><br><span class="line"><span class="comment">#include&lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include&lt;string&gt;</span></span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line">using namespace cv;</span><br><span class="line"></span><br><span class="line">Point pt1(0, 0);</span><br><span class="line">Point pt2(0, 0);</span><br><span class="line"></span><br><span class="line">bool is_selecting = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">bool flag1 = <span class="literal">true</span>;</span><br><span class="line">bool flag2 = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">string s_input = <span class="string">"sample/"</span>;		//源图像所在文件路径</span><br><span class="line">string s_output = <span class="string">"result/"</span>;		//输出图像文件路径</span><br><span class="line">string s_format = <span class="string">".jpg"</span>;		//图像格式</span><br><span class="line">int n = 477;				//图片最大编号</span><br><span class="line">int m = 1;				//图片最小编号</span><br><span class="line"></span><br><span class="line">ostringstream oss_input;		//拼接源图像路径</span><br><span class="line">ostringstream oss_output;		//拼接输出图像路径</span><br><span class="line"></span><br><span class="line">//鼠标监听事件</span><br><span class="line">void onMouseCallback(int mouseEvent, int x, int y, int flags, void* params)</span><br><span class="line">&#123;</span><br><span class="line">	switch (mouseEvent)</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="keyword">case</span> CV_EVENT_LBUTTONDOWN:	//鼠标左键按下</span><br><span class="line">		pt1 = Point(x, y);</span><br><span class="line">		pt2 = Point(x, y);</span><br><span class="line">		is_selecting = <span class="literal">true</span>;</span><br><span class="line">		<span class="built_in">break</span>;</span><br><span class="line">	<span class="keyword">case</span> CV_EVENT_MOUSEMOVE:	//鼠标移动</span><br><span class="line">		<span class="keyword">if</span> (is_selecting)</span><br><span class="line">			pt2 = Point(x, y);</span><br><span class="line">		<span class="built_in">break</span>;</span><br><span class="line">	<span class="keyword">case</span> CV_EVENT_LBUTTONUP:	//鼠标左键松开</span><br><span class="line">		pt2 = Point(x, y);</span><br><span class="line">		is_selecting = <span class="literal">false</span>;</span><br><span class="line">		<span class="built_in">break</span>;</span><br><span class="line">	default:</span><br><span class="line">		<span class="built_in">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//连接字符串，源图像为000001.jpg,000002.jpg,......</span><br><span class="line">void jointString(int i,int j)</span><br><span class="line">&#123;</span><br><span class="line">	oss_input.str(<span class="string">""</span>);</span><br><span class="line">	oss_output.str(<span class="string">""</span>);</span><br><span class="line"></span><br><span class="line">	string s1 = to_string(i);</span><br><span class="line">	string s2 = to_string(j);</span><br><span class="line"></span><br><span class="line">	ostringstream res1;</span><br><span class="line">	ostringstream res2;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (int k = 6; k - s1.length() &gt; 0; k--)&#123;</span><br><span class="line">		res1 &lt;&lt; <span class="string">"0"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	res1 &lt;&lt; s1;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (int k = 6; k - s2.length() &gt; 0; k--)&#123;</span><br><span class="line">		res2 &lt;&lt; <span class="string">"0"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	res2 &lt;&lt; s2;</span><br><span class="line"></span><br><span class="line">	oss_input &lt;&lt; s_input &lt;&lt; res1.str() &lt;&lt; s_format;</span><br><span class="line">	oss_output &lt;&lt; s_output &lt;&lt; res2.str() &lt;&lt; s_format;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//处理越界的点</span><br><span class="line">void processPoint(Point &amp;p1, Point &amp;p2, Mat image)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (pt1.x &lt; 0)</span><br><span class="line">		pt1.x = 0;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (pt1.x&gt;image.cols)</span><br><span class="line">		pt1.x = image.cols;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (pt2.x &lt; 0)</span><br><span class="line">		pt2.x = 0;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (pt2.x&gt;image.cols)</span><br><span class="line">		pt2.x = image.cols;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (pt1.y &lt; 0)</span><br><span class="line">		pt1.y = 0;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (pt1.y&gt;image.rows)</span><br><span class="line">		pt1.y = image.rows;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (pt2.y &lt; 0)</span><br><span class="line">		pt2.y = 0;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (pt2.y&gt;image.rows)</span><br><span class="line">		pt2.y = image.rows;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">	int i = m;	//当前图片编号</span><br><span class="line">	int j = 1;	//输出图像编号</span><br><span class="line"></span><br><span class="line">	jointString(i,j);	//生成源图像和输出图像路径</span><br><span class="line"></span><br><span class="line">	Mat image = imread(oss_input.str());	//导入图像</span><br><span class="line">	Mat show_image;				//备份图像</span><br><span class="line">	Mat saveImage(32 , 32 , image.type());	//目标图像,大小32*32px</span><br><span class="line"></span><br><span class="line">	namedWindow(<span class="string">"image"</span>);				//设置窗口名称</span><br><span class="line">	setMouseCallback(<span class="string">"image"</span> , onMouseCallback);	//为窗口设置监听事件</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (flag1)</span><br><span class="line">	&#123;</span><br><span class="line">		show_image = image.clone();</span><br><span class="line">		<span class="keyword">if</span> (image.cols &gt; 1200 || image.rows &gt; 700)</span><br><span class="line">		&#123;</span><br><span class="line">			resize(show_image, show_image, Size(round(0.5*show_image.cols), round(0.5*show_image.rows)), 0, 0, INTER_LINEAR);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		//绘制矩形</span><br><span class="line">		rectangle(show_image , pt1 , pt2 , Scalar(255 , 255 , 255));</span><br><span class="line"></span><br><span class="line">		imshow(<span class="string">"image"</span> , show_image);</span><br><span class="line"></span><br><span class="line">		//获取键盘输入</span><br><span class="line">		int key = waitKey(10);</span><br><span class="line"></span><br><span class="line">		//处理越界的点</span><br><span class="line">		processPoint(pt1 , pt2 , show_image);</span><br><span class="line"></span><br><span class="line">		//获取兴趣区域</span><br><span class="line">		Mat roiImage(show_image, Rect(min(pt1.x, pt2.x), min(pt1.y, pt2.y), abs(pt2.x - pt1.x), abs(pt2.y - pt1.y)));</span><br><span class="line"></span><br><span class="line">		flag2 = <span class="literal">true</span>;</span><br><span class="line">		<span class="keyword">while</span> (flag2)</span><br><span class="line">		&#123;</span><br><span class="line">			switch (key)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">case</span> 115:	//按s键,保存截图</span><br><span class="line">					flag2 = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">					//缩放图像</span><br><span class="line">					resize(roiImage , saveImage , saveImage.size() , 0 , 0 , INTER_LINEAR);</span><br><span class="line">					imwrite(oss_output.str() , saveImage);</span><br><span class="line"></span><br><span class="line">					//取消框框</span><br><span class="line">					pt1 = Point(0, 0);</span><br><span class="line">					pt2 = Point(0, 0);</span><br><span class="line"></span><br><span class="line">					j++;</span><br><span class="line">					jointString(i, j);</span><br><span class="line">					<span class="built_in">break</span>;</span><br><span class="line">				<span class="keyword">case</span> 110:	//按n键,下一张图片</span><br><span class="line">					flag2 = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">					pt1 = Point(0 , 0);</span><br><span class="line">					pt2 = Point(0 , 0);</span><br><span class="line"></span><br><span class="line">					i++;</span><br><span class="line">					jointString(i,j);</span><br><span class="line">					image = imread(oss_input.str());</span><br><span class="line">					<span class="keyword">if</span> (image.empty())</span><br><span class="line">					&#123;</span><br><span class="line">						<span class="keyword">if</span> (i &gt; n)</span><br><span class="line">						&#123;</span><br><span class="line">							i = n-1;</span><br><span class="line">						&#125;</span><br><span class="line">						flag2 = <span class="literal">true</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="built_in">break</span>;</span><br><span class="line">				<span class="keyword">case</span> 112:	//按p键，上一张图片</span><br><span class="line">					flag2 = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">					pt1 = Point(0 , 0);</span><br><span class="line">					pt2 = Point(0 , 0);</span><br><span class="line"></span><br><span class="line">					i--;</span><br><span class="line">					jointString(i,j);</span><br><span class="line">					image = imread(oss_input.str());</span><br><span class="line">					<span class="keyword">if</span> (image.empty())</span><br><span class="line">					&#123;</span><br><span class="line">						<span class="keyword">if</span> (i &lt; m)</span><br><span class="line">						&#123;</span><br><span class="line">							i = m+1;</span><br><span class="line">						&#125;</span><br><span class="line">						flag2 = <span class="literal">true</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="built_in">break</span>;</span><br><span class="line">				<span class="keyword">case</span> 113:	//按q键，退出</span><br><span class="line">					flag2 = <span class="literal">false</span>;</span><br><span class="line">					flag1 = <span class="literal">false</span>;</span><br><span class="line">					<span class="built_in">break</span>;</span><br><span class="line">				default:</span><br><span class="line">					flag2 = <span class="literal">false</span>;</span><br><span class="line">					<span class="built_in">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h3><h4 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h4><ol>
+<li>连接字符串: ostringstream oss&lt;&lt;s1&lt;&lt;s2&lt;&lt;…;</li>
+<li>清空oss: oss.str(“”);</li>
+<li>获取oss中的字符串： oss.str();</li>
+<li>将数字转换成string类型: to_string(number);</li>
+</ol>
+<h4 id="OpenCV"><a href="#OpenCV" class="headerlink" title="OpenCV"></a>OpenCV</h4><ol>
+<li>读入图像：(Mat)imread(src_path);</li>
+<li>输出图像：imwrite(dst_path,dst);</li>
+<li>改变图像大小: resize(src(Image),dst(Image),dsize(Size),0,0,interpolation(Int));</li>
+</ol>
+<ul>
+<li>INTER_NEAREST: 最邻近插值</li>
+<li>INTER_LINEAR: 双线性插值(默认)</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/11/22/Picture-Cutting/">图像裁剪</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">LiuNing</a></p>
+        <p><span>发布时间:</span>2017-11-22, 17:21:02</p>
+        <p><span>最后更新:</span>2017-11-22, 17:57:06</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/11/22/Picture-Cutting/" title="图像裁剪">https://liuning-scu-cn.github.io.git/2017/11/22/Picture-Cutting/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://liuning-scu-cn.github.io.git/2017/11/22/Picture-Cutting/　　作者: LiuNing" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/11/21/hello-world/">
+                    Hello World
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#图像裁剪"><span class="toc-number">1.</span> <span class="toc-text">图像裁剪</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#项目说明"><span class="toc-number">1.1.</span> <span class="toc-text">项目说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目代码实现"><span class="toc-number">1.2.</span> <span class="toc-text">项目代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#笔记"><span class="toc-number">1.3.</span> <span class="toc-text">笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#C"><span class="toc-number">1.3.1.</span> <span class="toc-text">C++</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OpenCV"><span class="toc-number">1.3.2.</span> <span class="toc-text">OpenCV</span></a></li></ol></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2017/11/21/hello-world/" title="下一篇: Hello World">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/11/22/Picture-Cutting/">图像裁剪</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/21/hello-world/">Hello World</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2017 LiuNing
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+    </div>
+</footer>
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+             github: ".github-widget a", 
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+            
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+    <script>
+        var originTitle = document.title;
+        var titleTime;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "(つェ⊂) 我藏好了哦~ " + originTitle;
+                clearTimeout(titleTime);
+            }
+            else {
+                document.title = "(*´∇｀*) 被你发现啦~ " + originTitle;
+                titleTime = setTimeout(function() {
+                    document.title = originTitle;
+                }, 2000);
+            }
+        })
+    </script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
