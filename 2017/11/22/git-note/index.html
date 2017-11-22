@@ -23,7 +23,7 @@
 <meta property="og:site_name" content="LiuNing&#39;s Blog">
 <meta property="og:description" content="在linux环境，关于git命令的记录。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-22T11:15:25.076Z">
+<meta property="og:updated_time" content="2017-11-22T11:19:20.297Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git 笔记">
 <meta name="twitter:description" content="在linux环境，关于git命令的记录。">
@@ -330,7 +330,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git diff &lt;file&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>历史版本穿梭</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git reset --hard commid_id	</span><br><span class="line">//commit_id: HEAD^		上一个版本</span><br><span class="line">//	     HEAD^^		上两个版本</span><br><span class="line">//	     HEAD~100	上100个版本</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git reset --hard commid_id	</span><br><span class="line">//commit_id: HEAD^		上一个版本</span><br><span class="line">//	     HEAD^^		上两个版本</span><br><span class="line">//	     HEAD~100		上100个版本</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>查看提交历史</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span> (--pretty=oneline) (--abbrev-commit)</span><br></pre></td></tr></table></figure>
@@ -359,7 +359,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -C <span class="string">"youremail@example.com"</span></span><br><span class="line">//一路enter</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>关联github</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add origin git@github.com:&lt;yourname&gt;/&lt;gitname&gt;.git	//(github)</span><br><span class="line">//git@gitee.com:&lt;yourname&gt;/&lt;gitname&gt;.git （码云）</span><br><span class="line">```						  </span><br><span class="line">3. 把本地库推送到远程库</span><br><span class="line">``` bash</span><br><span class="line">$ git push -u origin master	//第一次推送</span><br><span class="line">$ git push origin master	//再次推送以及之后的推送</span><br><span class="line">$ git push --force origin master		//强制推送</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add origin git@github.com:&lt;yourname&gt;/&lt;gitname&gt;.git	//(github)</span><br><span class="line">//git@gitee.com:&lt;yourname&gt;/&lt;gitname&gt;.git （码云）</span><br><span class="line">```						  </span><br><span class="line">3. 把本地库推送到远程库</span><br><span class="line">``` bash</span><br><span class="line">$ git push -u origin master			//第一次推送</span><br><span class="line">$ git push origin master			//再次推送以及之后的推送</span><br><span class="line">$ git push --force origin master		//强制推送</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>克隆仓库</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> git@github.com:&lt;yourname&gt;/&lt;gitname&gt;.git</span><br></pre></td></tr></table></figure>
@@ -411,7 +411,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git tag -a &lt;tagname&gt; -m <span class="string">"xxx"</span> &lt;commit_id&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>推送标签到远程</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin &lt;tagname&gt;	//单个标签</span><br><span class="line">$ git push origin --tags		//多个标签</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git push origin &lt;tagname&gt;		//单个标签</span><br><span class="line">$ git push origin --tags		//多个标签</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>删除本地标签</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git tag -d &lt;tagname&gt;</span><br></pre></td></tr></table></figure>
@@ -435,7 +435,7 @@
         <p><span>本文标题:</span><a href="/2017/11/22/git-note/">Git 笔记</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">LiuNing</a></p>
         <p><span>发布时间:</span>2017-11-22, 18:10:08</p>
-        <p><span>最后更新:</span>2017-11-22, 19:15:25</p>
+        <p><span>最后更新:</span>2017-11-22, 19:19:20</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2017/11/22/git-note/" title="Git 笔记">https://liuning-scu-cn.github.io.git/2017/11/22/git-note/</a>
             <span class="copy-path" data-clipboard-text="原文: https://liuning-scu-cn.github.io.git/2017/11/22/git-note/　　作者: LiuNing" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
