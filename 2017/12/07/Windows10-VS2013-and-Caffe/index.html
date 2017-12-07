@@ -15,18 +15,18 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is my first post.">
-<meta name="keywords" content="Yelee,Hexo">
+<meta name="description" content="在windows10操作系统上进行mnist手写数字的训练和测试">
+<meta name="keywords" content="Caffe">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://liuning-scu-cn.github.io.git/2017/11/21/hello-world/index.html">
+<meta property="og:title" content="Windows and Caffe">
+<meta property="og:url" content="https://liuning-scu-cn.github.io.git/2017/12/07/Windows10-VS2013-and-Caffe/index.html">
 <meta property="og:site_name" content="LiuNing&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is my first post.">
+<meta property="og:description" content="在windows10操作系统上进行mnist手写数字的训练和测试">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-07T12:40:18.953Z">
+<meta property="og:updated_time" content="2017-12-07T14:46:41.506Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is my first post.">
+<meta name="twitter:title" content="Windows and Caffe">
+<meta name="twitter:description" content="在windows10操作系统上进行mnist手写数字的训练和测试">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -58,7 +58,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Hello World | LiuNing&#39;s Blog</title>
+<title>Windows and Caffe | LiuNing&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -271,11 +271,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-Windows10-VS2013-and-Caffe" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/11/21/hello-world/" class="article-date">
-      <time datetime="2017-11-21T13:07:46.281Z" itemprop="datePublished">2017-11-21</time>
+      <a href="/2017/12/07/Windows10-VS2013-and-Caffe/" class="article-date">
+      <time datetime="2017-12-07T11:34:48.000Z" itemprop="datePublished">2017-12-07</time>
 </a>
 
 
@@ -290,7 +290,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      Windows and Caffe
     </h1>
   
 
@@ -299,13 +299,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/生活/">生活</a>
+    <a class="article-category-link" href="/categories/深度学习/">深度学习</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yelee/">Yelee</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Caffe/">Caffe</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -316,15 +316,66 @@
       
           
         <a id="more"></a>
-<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is my first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h4 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h4 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h4 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h4 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<h4 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h4><ul>
+<li>windows 10 操作系统</li>
+<li>Visual Studio 2013</li>
+</ul>
+<h4 id="配置Caffe"><a href="#配置Caffe" class="headerlink" title="配置Caffe"></a>配置Caffe</h4><ol>
+<li>下载Windows版本的<a href="&quot;https://www.anaconda.com/download/&quot;">Anaconda2</a>，然后进行安装即可(在此我安装在D:/Anaconda2/目录下)。</li>
+<li>下载VS2013版的<a href="&quot;https://github.com/Microsoft/caffe&quot;">Caffe</a>。</li>
+<li>将Caffe源码中的windows目录下CommonSettings.props.example文件复制一份，并重命名为CommonSettings.props。</li>
+<li><p>以文本文件的方式打开CommonSettings.props文件，将其中的内容进行如下修改。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;CpuOnlyBuild&gt;<span class="literal">true</span>&lt;/CpuOnlyBuild&gt;</span><br><span class="line">&lt;UseCuDNN&gt;<span class="literal">false</span>&lt;/UseCuDNN&gt;</span><br><span class="line">&lt;PythonSupport&gt;<span class="literal">true</span>&lt;/PythonSupport&gt;</span><br><span class="line">&lt;PropertyGroup Condition=<span class="string">"'<span class="variable">$(PythonSupport)</span>'=='true'"</span>&gt;</span><br><span class="line">    &lt;PythonDir&gt;D:\Anaconda2\&lt;/PythonDir&gt;</span><br><span class="line">&lt;/PropertyGroup&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开工程Caffe.sln，配置libcaffe的属性，libcaffe项目右键—配置属性—C/C++—附加包含目录–编辑添加目录(D:\Anaconda2\include)。</p>
+</li>
+<li>配置pycaffe的属性，pycaffe项目右键—配置属性—链接器—附加库目录–编辑添加目录(D:\Anaconda2\libs;D:\Anaconda2\Lib\site-packages\numpy\core\lib)。</li>
+<li><p>解决缺少Python27_d.lib文件，修改pycaffe的外部依赖项中的pyconfig.h文件，将其中的内容进行如下修改。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 1.在<span class="string">"# define Py_DEBUG"</span>前加<span class="string">"//"</span></span><br><span class="line"><span class="comment">#ifdef _DEBUG </span></span><br><span class="line"><span class="comment">#    define Py_DEBUG </span></span><br><span class="line"><span class="comment">#endif </span></span><br><span class="line"></span><br><span class="line">// 2.将第8行的<span class="string">"python27_d.lib"</span>改为<span class="string">"python27.lib"</span></span><br><span class="line"><span class="comment"># ifdef _DEBUG </span></span><br><span class="line"><span class="comment">#     pragma comment(lib,"python27_d.lib") </span></span><br><span class="line"><span class="comment"># else </span></span><br><span class="line"><span class="comment">#     pragma comment(lib,"python27.lib") </span></span><br><span class="line"><span class="comment"># endif /* _DEBUG */ </span></span><br><span class="line"></span><br><span class="line">// 3.在<span class="string">"#define Py_TRACE_REFS"</span>前加<span class="string">"//"</span> </span><br><span class="line"><span class="comment">#if defined(Py_DEBUG) &amp;&amp; !defined(Py_TRACE_REFS) </span></span><br><span class="line"><span class="comment">#    define Py_TRACE_REFS </span></span><br><span class="line"><span class="comment">#endif</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改convert_mnist_data解决方案中的convert_mnist_data.cpp文件（后面转换数据会用到）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//原来是1TB，改小一点即可，用于转换数据</span><br><span class="line">CHECK_EQ(mdb_env_set_mapsize(mdb_env, 1073741824), MDB_SUCCESS)  // 1GB</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>点击整个项目右键选择生成解决方法。程序运行完毕后会在根目录下生成NugetPackages(里面必须包含16个文件夹)。同时会在Build文件夹里面生成x64\Debug文件。</p>
+</li>
+<li>将Build\x64\Debug\pycaffe文件夹下的caffe文件复制到Anaconda2\Lib\site-packages目录下。</li>
+</ol>
+<h4 id="mnist训练"><a href="#mnist训练" class="headerlink" title="mnist训练"></a>mnist训练</h4><ol>
+<li>下载mnist数据，包括以下4个文件：<ul>
+<li><a href="&quot;http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz&quot;">http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz</a></li>
+<li><a href="&quot;http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz&quot;">http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz</a></li>
+<li><a href="&quot;http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz&quot;">http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz</a></li>
+<li><a href="&quot;http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz&quot;">http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz</a></li>
+</ul>
+</li>
+<li><p>编写并执行create_mnist.bat文件，内容如下(采用绝对路径)：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">D:\CaffeDev\caffe-windows\Build\x64\Debug\convert_mnist_data.exe F:\caffe\train-images.idx3-ubyte F:\caffe\train-labels.idx1-ubyte F:\caffe\mnist_train_lmdb   </span><br><span class="line"><span class="built_in">echo</span>.   </span><br><span class="line">D:\CaffeDev\caffe-windows\Build\x64\Debug\convert_mnist_data.exe F:\caffe\t10k-images.idx3-ubyte F:\caffe\t10k-labels.idx1-ubyte F:\caffe\mnist_test_lmdb  </span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将生成的mnist_train_lmdb和mnist_test_lmdb文件复制到D:\CaffeDev\caffe-windows\data\mnist目录下(也可以是其他任意目录，但是路径需要明白，后面要用到)</p>
+</li>
+<li>打开examples\mnist目录下的lenet_solver.prototxt文件，可以看到solver_mode: GPU这一选项，可以设置为GPU或者CPU，在这里我选择为CPU，同时将里面的路径都改为绝对路径。</li>
+<li>打开examples\mnist目录下的lenet_train_test.prototxt文件，修改第一个layer的source为训练数据绝对路径(“D:/CaffeDev/caffe-windows/data/mnist/mnist_train_lmdb/“)，第二个layer的source为测试数据绝对路径(“D:/CaffeDev/caffe-windows/data/mnist/mnist_test_lmdb/“)。</li>
+<li><p>编写并运行train_mnist.bat文件，内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D:\CaffeDev\caffe-windows\Build\x64\Debug\caffe.exe train --solver=D:\CaffeDev\caffe-windows\examples\mnist\lenet_solver.prototxt</span><br><span class="line">Pause</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>程序运行完毕后会在examples\mnist目录下生成lenet_iter_5000.caffemodel,lenet_iter_5000.solverstate,lenet_iter_10000.caffemodel,lenet_iter_10000.solverstate四个文件，表示训练完成。</p>
+</li>
+</ol>
+<h4 id="mnist测试1"><a href="#mnist测试1" class="headerlink" title="mnist测试1"></a>mnist测试1</h4><ol>
+<li>编辑并运行test.bat文件，内容如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D:\CaffeDev\caffe-windows\Build\x64\Debug\caffe.exe <span class="built_in">test</span> --model=D:\CaffeDev\caffe-windows\examples\mnist\lenet_train_test.prototxt -weights=D:\CaffeDev\lenet_iter_10000.caffemodel</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="mnist测试2"><a href="#mnist测试2" class="headerlink" title="mnist测试2"></a>mnist测试2</h4><ol>
+<li><p>编辑并运行mnist_mean.bat文件，内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D:\CaffeDev\caffe-windows\Build\x64\Debug\compute_image_mean.exe D:\CaffeDev\caffe-windows\data\mnist\mnist_train_lmdb mean.binaryproto</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写labels.txt文件，填写标签，内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">0</span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用绘图软件绘制28*28px图片(.bmp格式)，在上面进行手写数字作为测试样本(在此我绘制的数字为3，以3.bmp格式进行保存)。</p>
+</li>
+<li>编辑并运行classification.bat文件，内容如下：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D:\CaffeDev\caffe-windows\Build\x64\Debug\classification.exe D:\CaffeDev\caffe-windows\examples\mnist\lenet.prototxt D:\CaffeDev\lenet_iter_10000.caffemodel D:\CaffeDev\mean.binaryproto D:\CaffeDev\labels.txt D:\CaffeDev\3.bmp</span><br><span class="line">pause</span><br></pre></td></tr></table></figure></li>
+</ol>
 
       
     </div>
@@ -333,13 +384,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/11/21/hello-world/">Hello World</a></p>
+        <p><span>本文标题:</span><a href="/2017/12/07/Windows10-VS2013-and-Caffe/">Windows and Caffe</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">LiuNing</a></p>
-        <p><span>发布时间:</span>2017-11-21, 21:07:46</p>
-        <p><span>最后更新:</span>2017-12-07, 20:40:18</p>
+        <p><span>发布时间:</span>2017-12-07, 19:34:48</p>
+        <p><span>最后更新:</span>2017-12-07, 22:46:41</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/11/21/hello-world/" title="Hello World">https://liuning-scu-cn.github.io.git/2017/11/21/hello-world/</a>
-            <span class="copy-path" data-clipboard-text="原文: https://liuning-scu-cn.github.io.git/2017/11/21/hello-world/　　作者: LiuNing" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2017/12/07/Windows10-VS2013-and-Caffe/" title="Windows and Caffe">https://liuning-scu-cn.github.io.git/2017/12/07/Windows10-VS2013-and-Caffe/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://liuning-scu-cn.github.io.git/2017/12/07/Windows10-VS2013-and-Caffe/　　作者: LiuNing" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -351,12 +402,12 @@
 
     <nav id="article-nav">
         
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/2017/11/22/Picture-Cutting/">
-                    图像裁剪
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2017/11/26/HaarClassifier/">
+                    HaarClassifier
                 </a>
             </div>
-        
         
     </nav>
 
@@ -366,7 +417,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Run-server"><span class="toc-number">2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#实验环境"><span class="toc-number">1.</span> <span class="toc-text">实验环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#配置Caffe"><span class="toc-number">2.</span> <span class="toc-text">配置Caffe</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mnist训练"><span class="toc-number">3.</span> <span class="toc-text">mnist训练</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mnist测试1"><span class="toc-number">4.</span> <span class="toc-text">mnist测试1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mnist测试2"><span class="toc-number">5.</span> <span class="toc-text">mnist测试2</span></a></li></ol>
         
     </div>
     <style>
@@ -397,15 +448,15 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2017/11/22/Picture-Cutting/" title="上一篇: 图像裁剪">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
 
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+            <a href="/2017/11/26/HaarClassifier/" title="下一篇: HaarClassifier">
+                <i class="fa fa-angle-right"></i>
+            </a>
         
     </div>
 
